@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Book</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Update Book</h1>
+    <p>
+        <a href="/books" class="btn btn-secondary">Book list</a>
+    </p>
+    <th:block th:if="${message}">
+        <div class="alert alert-info" th:text="${message}"></div>
+    </th:block>
+    <form th:action="@{/books/update}" th:object="${book}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" th:field="*{id}">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" th:field="*{name}" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="author">Author:</label>
+            <input type="text" id="author" th:field="*{author}" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="price">Price:</label>
+            <input type="number" id="price" th:field="*{price}" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="type">Type:</label>
+            <select id="type" th:field="*{type}" class="form-control">
+                <option th:each="t : ${types}" th:value="${t.id}" th:text="${t.name}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="image">Image:</label>
+            <input type="file" id="image" th:field="*{image}" class="form-control-file">
+        </div>
+        <button type="submit" class="btn btn-primary">Update Book</button>
+    </form>
+</div>
+</body>
+</html>
